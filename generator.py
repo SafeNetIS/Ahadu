@@ -154,7 +154,9 @@ class Generator:
     def write_output(self):
         for result in self.results:
             self.output_file.write(result + "\n")
-        self.output_file.close()
+        if self.output_file != sys.stdout:
+            self.output_file.close()
+        return len(self.results)
 
 
 if __name__ == '__main__':
@@ -163,7 +165,7 @@ if __name__ == '__main__':
     parser.add_argument('-w', required=True, metavar='word', nargs='+', type=str,
                         help='possible words used in the password')
     parser.add_argument('-s', action='store_true', default=False, help='ordered list of words')
-    parser.add_argument('-l', metavar='level', default=5, type=int, help='possible words used in the password')
+    parser.add_argument('-l', metavar='level', default=5, type=int, help='level of character replacement strength (1 - 5)')
     parser.add_argument('-o', metavar='output.txt', default=sys.stdout, type=argparse.FileType('w'),
                         help='The output file where the password list should be written')
 
@@ -171,4 +173,8 @@ if __name__ == '__main__':
 
     generator = Generator(args.w, args.o, args.l, args.s)
     generator.generate()
-    generator.write_output()
+    results = generator.write_output()
+    if args.o != sys.stdout:
+        print("Generated passwords file with %d possible passwords" % (results))
+    else:
+        print("Generated %d possible passwords" % (results))
