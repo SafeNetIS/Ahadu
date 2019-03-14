@@ -13,7 +13,7 @@ The tool generates a password list file based on the input provided. The tool ge
 
 First, get the code:
 ```
-https://github.com/SafeNetIS/AdvancedPasswordListGenerator
+https://github.com/SafeNetIS/Ahadu
 ```
 
 Ahadu is written in Python and requires argparse which can be installed using Pip:
