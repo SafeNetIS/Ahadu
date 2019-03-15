@@ -31,6 +31,7 @@ class Generator:
         self.results = []
         self.words = words
         self.level = level
+        self.strict_mode = strict_mode
         self.word_forms = {}
         for word in self.words:
             self.word_forms[word] = self.generate_word_forms(word)
@@ -80,9 +81,11 @@ class Generator:
 
         for word in self.words:
             for one_word in self.one_word_dictionary:
+                if len(one_word["forms"]) < 1:
+                    continue
                 if word in one_word["forms"]:
                     continue
-                if len(one_word["forms"]) == 0:
+                if self.strict_mode and self.words.index(word) >= self.words.index(one_word["forms"][0]):
                     continue
 
                 for word_form in self.word_forms[word]:
@@ -101,9 +104,11 @@ class Generator:
 
         for word in self.words:
             for two_word in self.two_word_dictionary:
+                if len(two_word["forms"]) < 2:
+                    continue
                 if word in two_word["forms"]:
                     continue
-                if len(two_word["forms"]) < 2:
+                if self.strict_mode and self.words.index(word) >= self.words.index(two_word["forms"][0]):
                     continue
 
                 for word_form in self.word_forms[word]:
