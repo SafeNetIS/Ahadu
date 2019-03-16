@@ -24,7 +24,7 @@ pip install argparse
 # Usage
 Go to the command line and run
 
-        Usage: python generator.py [-h] -w word [word ...] [-s] [-l level] [-o output.txt]
+        Usage: python ahadu.py [-h] -w word [word ...] [-s] [-l level] [-o output.txt]
 
         optional arguments:
           -h, --help          show help message and exit
@@ -35,6 +35,6 @@ Go to the command line and run
                               written
 
 ```
-python generator.py -w admin pass 2019 -o output.txt
+python ahadu.py -w admin pass 2019 -o output.txt
 Generated passwords file with 3600 possible passwords
 ```
